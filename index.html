@@ -1,287 +1,128 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <title>HEHEHEHEHE️</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* --- CSS CHUNG CHO TOÀN TRANG --- */
-        body {
-            margin: 0; 
-            padding: 0; 
-            min-height: 100vh;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            background: linear-gradient(135deg, #ffe6e6 0%, #ffc0cb 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center; 
-         
-            position: relative;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Album Người Yêu 💖</title>
 
-        /* Khung trắng chứa nội dung (Card) */
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px 30px; 
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2);
-            max-width: 400px; 
-            width: 90%; 
-            z-index: 10;
-            animation: fadeIn 0.8s ease-out;
-        }
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
 
-        /* Dùng để ẩn các phần không cần thiết */
-        .hidden { 
-            display: none !important; 
-        }
+    body{
+      background: linear-gradient(135deg,#ffd6e7,#ffeef5);
+      min-height:100vh;
+      padding:30px;
+    }
 
-        /* --- CSS CHO FORM ĐĂNG NHẬP --- */
-        .card h2 { 
-            color: #ff4d4d; 
-            margin-bottom: 25px; 
-            font-size: 1.8em; 
-        }
-        .input-group { 
-            margin-bottom: 20px; 
-            text-align: left; 
-        }
-        .input-group label { 
-            display: block; 
-            color: #555; 
-            font-weight: bold; 
-            margin-bottom: 8px; 
-        }
-        .input-group input[type="text"] {
-            width: 100%; 
-            padding: 12px; 
-            border: 2px solid #ffb3b3;
-            border-radius: 10px; 
-            font-size: 16px; 
-            box-sizing: border-box;
-            outline: none; 
-            transition: 0.3s;
-        }
-        .input-group input[type="text"]:focus { 
-            border-color: #ff4d4d; 
-            box-shadow: 0 0 8px rgba(255, 77, 77, 0.3); 
-        }
-        
-        .button-group { 
-            display: flex; 
-            gap: 15px; 
-            justify-content: center; 
-            margin-top: 25px; 
-        }
-        .btn {
-            padding: 12px 20px; 
-            border: none; 
-            border-radius: 25px;
-            font-size: 16px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            transition: 0.2s; 
-            flex: 1;
-        }
-        .btn-ok { 
-            background-color: #ff4d4d; 
-            color: white; 
-            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4); 
-        }
-        .btn-ok:hover { 
-            transform: scale(1.05); 
-            background-color: #ff3333; 
-        }
-        .btn-no { 
-            background-color: #f1f1f1; 
-            color: #666; 
-        }
-        .btn-no:hover { 
-            background-color: #e2e2e2; 
-            transform: scale(1.05); 
-        }
+    h1{
+      text-align:center;
+      color:#ff3f81;
+      margin-bottom:25px;
+      font-size:40px;
+    }
 
-        /* --- CSS CHO PHẦN THÔNG BÁO LỖI --- */
-        #error-message { 
-            color: #dc3545; 
-            font-size: 1.2em; 
-            font-weight: bold; 
-            margin-bottom: 20px; 
-            line-height: 1.5; 
-        }
-        #error-message h1 { 
-            font-size: 1.8em; 
-            margin: 10px 0; 
-        }
-        .btn-back { 
-            background-color: #007bff; 
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4); 
-            margin-top: 15px; 
-            width: 100%;
-        }
-        .btn-back:hover { 
-            background-color: #0056b3; 
-        }
+    .upload-box{
+      display:flex;
+      justify-content:center;
+      margin-bottom:30px;
+    }
 
-        /* --- CSS CHO PHẦN THÀNH CÔNG --- */
-        .main-heart { 
-            color: #ff4d4d; 
-            font-size: 80px; 
-            margin: 0; 
-            display: inline-block; 
-            animation: heartbeat 1.2s infinite; 
-            text-shadow: 0 0 20px rgba(255, 77, 77, 0.5); 
-        }
-        .success-title { 
-            color: #ff4d4d; 
-            font-size: 2.2em; 
-            margin-bottom: 10px; 
-            margin-top: 10px; 
-        }
-        .success-text { 
-            color: #555; 
-            font-size: 1.2em; 
-            line-height: 1.6; 
-            margin-bottom: 20px; 
-            font-weight: bold; 
-        }
-        .card img { 
-            max-width: 100%; 
-            border-radius: 15px; 
-            margin-top: 15px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-        }
-        
-        /* Hiệu ứng xuất hiện */
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(-20px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        
-        /* Hiệu ứng tim đập */
-        @keyframes heartbeat { 
-            0%, 28%, 70% { transform: scale(1); } 
-            14%, 42% { transform: scale(1.3); } 
-        }
-        
-        /* Hiệu ứng tim bay lơ lửng */
-        .floating-heart { 
-            position: absolute; 
-            font-size: 24px; 
-            color: #ff4d4d; 
-            animation: floatUp 4s linear forwards; 
-            z-index: 1; 
-            opacity: 0.7; 
-        }
-        @keyframes floatUp { 
-            0% { transform: translateY(100vh) scale(0.5); opacity: 1; } 
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } 
-        }
-    </style>
+    label{
+      background:#ff4f93;
+      color:white;
+      padding:14px 28px;
+      border-radius:15px;
+      cursor:pointer;
+      font-size:18px;
+      transition:0.3s;
+    }
+
+    label:hover{
+      background:#ff2675;
+      transform:scale(1.05);
+    }
+
+    input{
+      display:none;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 5px 15px rgba(0,0,0,0.15);
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+    }
+
+    .card img{
+      width:100%;
+      height:300px;
+      object-fit:cover;
+    }
+
+    .caption{
+      padding:12px;
+      text-align:center;
+      color:#555;
+      font-weight:bold;
+    }
+  </style>
 </head>
+
 <body>
 
-    <div id="login-section" class="card">
-        <div class="input-group">
-            <label for="input">Nhập mật khẩu i! (Ngày sinh của anh):</label>
-            <input type="text" id="input"  autocomplete="off" />
-        </div>
-        <div class="input-group" style="text-align: center; margin-bottom: 0;">
-            <label>Chắc chưaaaaa?</label>
-        </div>
-        <div class="button-group">
-            <button class="btn btn-ok" onclick="checkLogic('ok')">OK<3</button>
-            <button class="btn btn-no" onclick="checkLogic('no')">Chưa:(((</button>
-        </div>
-    </div>
+  <h1>💖 Album Người Yêu 💖</h1>
 
-    <div id="error-section" class="card hidden">
-        <div id="error-message"></div>
-        <button class="btn btn-ok btn-back" onclick="resetForm()">Nhấn chỗ này để quay lại nhập</button>
-    </div>
+  <div class="upload-box">
+    <label>
+      📸 Upload Ảnh
+      <input type="file" multiple accept="image/*" id="upload">
+    </label>
+  </div>
 
-    <div id="success-section" class="card hidden">
-        <div class="main-heart">❤️</div>
-        <h1 class="success-title">Giỏiiii</h1>
-        <p class="success-text">Nhớ tốt đấyyy<br>Yêu emm💖</p>
-        <div>
-            <img src="tunggg.jpg" alt="Ảnh tôiii">
-        </div>
-    </div>
+  <div class="gallery" id="gallery"></div>
 
-    <script>
-        const loginSec = document.getElementById('login-section');
-        const errorSec = document.getElementById('error-section');
-        const successSec = document.getElementById('success-section');
-        const errorMsg = document.getElementById('error-message');
-        const inputField = document.getElementById('input');
+  <script>
+    const upload = document.getElementById("upload");
+    const gallery = document.getElementById("gallery");
 
-        // Hàm kiểm tra khi người dùng bấm nút
-        function checkLogic(action) {
-            // Trường hợp bấm nút "Chưa:((("
-            if (action === 'no') {
-                showError("Cho cơ hội cuối !");
-                return;
-            }
+    upload.addEventListener("change", function () {
+      const files = this.files;
 
-            const val = inputField.value.trim();
+      for (let file of files) {
+        const reader = new FileReader();
 
-            // Trường hợp không nhập gì
-            if (val === "") {
-                showError("<h1>Quên nhập ngày sinh anh rồi kìa quên không nhập hay là không nhớ???</h1>Nhập lại nhanh đii!");
-                return;
-            }
+        reader.onload = function (e) {
+          const card = document.createElement("div");
+          card.className = "card";
 
-            const num = Number(val);
+          card.innerHTML = `
+            <img src="${e.target.result}">
+            <div class="caption">${file.name}</div>
+          `;
 
-            // Trường hợp nhập chữ linh tinh, không phải số
-            if (isNaN(num)) {
-                showError("Em nhập gì tào lao không phải số hả !");
-                return;
-            }
+          gallery.appendChild(card);
+        };
 
-            // Trường hợp nhập ĐÚNG số 2 (nhập 02, 2, hay 002 đều được nhận diện là đúng)
-            if (num === 2) {
-                // Ẩn form đăng nhập, hiện lời nhắn thành công
-                loginSec.classList.add('hidden');
-                successSec.classList.remove('hidden');
-                // Bật hiệu ứng tim bay lơ lửng liên tục
-                setInterval(createHeart, 300);
-            } else {
-                // Trường hợp nhập SAI số
-                showError("EM KHÔNG NHỚ NGÀY SINH CỦA ANH ????<h1>DỖIIIIIIII</h1>");
-            }
-        }
-
-        // Hàm hiển thị giao diện báo lỗi
-        function showError(msg) {
-            errorMsg.innerHTML = msg;
-            loginSec.classList.add('hidden');
-            errorSec.classList.remove('hidden');
-        }
-
-        // Hàm quay lại từ trang báo lỗi
-        function resetForm() {
-            inputField.value = ""; // Xóa trắng ô nhập liệu
-            errorSec.classList.add('hidden');
-            loginSec.classList.remove('hidden');
-        }
-
-        // Hàm tạo hiệu ứng trái tim bay lên
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤';
-            heart.classList.add('floating-heart');
-            // Cài đặt vị trí, kích thước, thời gian bay ngẫu nhiên
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(heart);
-            // Xóa phần tử sau 5 giây để tránh đầy bộ nhớ
-            setTimeout(() => { heart.remove(); }, 5000);
-        }
-    </script>
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 
 </body>
 </html>
